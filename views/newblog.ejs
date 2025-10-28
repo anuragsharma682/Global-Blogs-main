@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create new Blog || Global Blogs</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .form-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .form-title {
+      color: #343a40;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .form-control {
+      border: none;
+      border-radius: 20px;
+      background-color: #f8f9fa;
+      box-shadow: none;
+      transition: all 0.3s ease-in-out;
+    }
+    .form-control:focus {
+      border: 2px solid #007bff;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      border-radius: 20px;
+      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+    .btn-primary:focus {
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+    .form-check-input {
+      width: 20px;
+      height: 20px;
+      margin-top: 0.25rem;
+    }
+    .form-check-label {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <%- include('./partials/navbar')%>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="form-container">
+          <h2 class="text-center form-title">Create Blog</h2>
+          <form action="/newBlog" method="post">
+            <div class="form-group">
+              <label for="postTitle">Title</label>
+              <input type="text" class="form-control" id="postTitle" name="title" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+              <label for="postDescription">Description</label>
+              <textarea class="form-control" id="postDescription" rows="3" name="desc" placeholder="Enter description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="postImage">Image Link</label>
+              <input type="text" class="form-control" id="postImage" name="titleImage" placeholder="Enter image link">
+            </div>
+            <div class="form-group">
+              <label for="postType">Blog Type</label>
+              <select class="form-control" name="category" id="postType">
+                <option  >Select the Category </option>
+                <option value="Technical">Technical</option>
+                <option value="Sports">Sports</option>
+                <option value="Medical">Medical</option>
+                <option value="Political">Political</option>
+                <option value="Educational">Educational</option>
+                
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

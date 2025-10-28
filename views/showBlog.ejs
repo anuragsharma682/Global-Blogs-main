@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f6f6f6;
+      color: #333;
+    }
+
+    .blog-post {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-post img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .badge-category {
+      background-color: #6c757d;
+    }
+
+    .btn-read-more {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-share {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+
+    .comment {
+      width: 20vw;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+
+    .comment img {
+      border-radius: 50%;
+    }
+
+    .delete-btn {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .dashed-background {
+      background-image: radial-gradient(circle, #999 1px, transparent 1px), radial-gradient(circle, #999 1px, transparent 1px);
+      background-position: 0 0, 25px 25px;
+      background-size: 50px 50px;
+      background-color: #f6f6f6;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('./partials/navbar')%>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+
+          <!-- Blog Post -->
+          <div class="blog-post">
+            <h2 class="text-center">
+              <%= blog.title %>
+            </h2>
+            <img src="<%= blog.titleImage %>" alt="Blog Post Image" class="mx-auto d-block">
+            <p>
+              <%= blog.desc %>
+            </p>
+            <p>Category: <span class="badge badge-primary badge-category">
+                <%= blog.category%>
+              </span></p>
+            <p>Date : <span class="font-weight-light">
+                <%= blog.postedDate%>
+              </span></p>
+            <p><b><i>Author :</i></b>
+              <%= blog.authorName%>
+            </p>
+            <div class="text-center">
+              <a href="/edit/<%= blog._id%>" class="btn btn-outline-primary btn-read-more">Edit</a>
+              <a href="/blog/<%= blog._id%>/delete" class="btn btn-outline-warning btn-share">Delete</a>
+              <br><br>
+              <form action="/addToFavorites/<%=blog._id%>/add" method="post">
+                 <button type="submit" class="btn btn-outline-warning btn-share" >Add to Favorite</button>
+              </form>
+            </div>
+          </div>
+          <!-- End Blog Post -->
+
+        </div>
+        <div class="col-md-6">
+
+          <!-- Comments Section -->
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <h3 class="text-center mb-4">Comments</h3>
+            <!-- Single Comment -->
+            <% for(let item of blog.comments){ %>
+              <div class="comment" style="display: flex; align-items: self-start;">
+                <!-- <img class="mr-3" src="https://via.placeholder.com/50" alt="Generic placeholder image"> -->
+                <svg style="margin-top:5px ;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                  fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                  <path
+                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                </svg>
+                <div class="media-body">
+                  <h5 class="mt-0">
+                    <%=item.username%>
+                  </h5>
+                  <p>
+                    <%=item.comment%>
+                  </p>
+                  <a href="/comment/<%=item._id%>/delete"><button type="button"
+                      class="btn btn-outline-warning delete-btn">Delete</button></a>
+                </div>
+              </div>
+              <% } %>
+                <!-- End Single Comment -->
+                <!-- Add your comment form -->
+                <form class="w-75 mt-4" action="/blogs/<%=blog._id%>/add" method="post">
+
+                  <div class="form-group">
+                    <label for="commentText">Your Comment</label>
+                    <textarea class="form-control" name="comment" id="commentText" rows="3"
+                      placeholder="Enter your comment"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-outline-success">Submit</button>
+                </form>
+          </div>
+          <!-- End Comments Section -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
